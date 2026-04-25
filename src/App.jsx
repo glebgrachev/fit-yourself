@@ -6,6 +6,7 @@ import ServiceDetailPage from './pages/ServiceDetailPage'
 import TrainerPage from './pages/TrainerPage'
 import PrivacyPage from './pages/PrivacyPage'
 import OfferPage from './pages/OfferPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/trainer" element={<TrainerPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/offer" element={<OfferPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
         <Footer />

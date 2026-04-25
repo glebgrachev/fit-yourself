@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { supabase } from '../../services/supabase'
 
 const TELEGRAM_BOT_TOKEN = '8286883049:AAH4dOdRfGdePaA-mtSvduzym1OcYhtDrPo'
@@ -160,6 +159,7 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         </div>
       )}
 
+      {/* Имя */}
       <div>
         <label className="block text-text-primary font-medium mb-2">Ваше имя *</label>
         <input
@@ -173,6 +173,7 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         />
       </div>
 
+      {/* Телефон */}
       <div>
         <label className="block text-text-primary font-medium mb-2">Телефон *</label>
         <input
@@ -186,6 +187,7 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         />
       </div>
 
+      {/* Выбор услуги (если не скрыт) */}
       {!hideServiceSelect && (
         <div>
           <label className="block text-text-primary font-medium mb-2">Выберите услугу</label>
@@ -208,13 +210,22 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         </div>
       )}
 
+      {/* Чекбокс согласия */}
       <div className="flex items-center gap-2">
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
         <label htmlFor="consent" className="text-sm text-text-secondary">
-          Согласен с <Link to="/privacy" target="_blank" className="text-primary hover:underline">политикой конфиденциальности</Link>
+          Согласен с 
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
+            политикой конфиденциальности
+          </a>
+          {' '}и{' '}
+          <a href="/offer" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+            договором оферты
+          </a>
         </label>
       </div>
 
+      {/* Кнопка отправки */}
       <button
         type="submit"
         disabled={isSubmitting}
