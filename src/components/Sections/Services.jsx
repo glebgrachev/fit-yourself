@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { supabase } from '../../services/supabase'
 
 function Services({ onBookingClick }) {
@@ -44,24 +45,20 @@ function Services({ onBookingClick }) {
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service) => (
-            <div 
-              key={service.id} 
-              className="card-bg rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2"
-            >
-              <h3 className="text-2xl font-bold text-text-primary mb-2">{service.title}</h3>
-              <div className="text-3xl font-bold text-primary mb-2">
-                {service.price === 0 ? 'Бесплатно' : `${service.price.toLocaleString()} ₽`}
-              </div>
-              <div className="text-text-secondary text-sm mb-4">{service.duration}</div>
-              <p className="text-text-secondary mb-4">{service.description}</p>
-              <ul className="space-y-2 mb-6">
-                {service.features?.map((feature, idx) => (
-                  <li key={idx} className="text-text-secondary text-sm">✓ {feature}</li>
-                ))}
-              </ul>
+            <div key={service.id} className="card-bg rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 flex flex-col">
+              <Link to={`/service/${service.id}`} className="block">
+                <h3 className="text-2xl font-bold text-text-primary mb-2 hover:text-primary transition min-h-[72px]">
+                  {service.title}
+                </h3>
+                <div className="text-3xl font-bold text-primary mb-2">
+                  {service.price === 0 ? 'Бесплатно' : `${service.price.toLocaleString()} ₽`}
+                </div>
+                <div className="text-text-secondary text-sm mb-4">{service.duration}</div>
+                <p className="text-text-secondary mb-6 line-clamp-3">{service.description}</p>
+              </Link>
               <button 
-                onClick={onBookingClick}
-                className="w-full bg-primary text-white px-4 py-2 rounded-full hover:bg-red-700 transition"
+                onClick={() => onBookingClick()}
+                className="w-full bg-primary text-white px-4 py-2 rounded-full hover:bg-red-700 transition mt-auto"
               >
                 Записаться
               </button>

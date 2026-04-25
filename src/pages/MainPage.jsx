@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Header from '../components/Layout/Header'
 import Footer from '../components/Layout/Footer'
 import Hero from '../components/Sections/Hero'
 import Services from '../components/Sections/Services'
@@ -13,14 +12,12 @@ function MainPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
+      {/* Header убран отсюда — он в App.jsx */}
+      <main className="flex-grow pt-4">
         <Hero onBookingClick={() => setIsModalOpen(true)} />
         <Services onBookingClick={() => setIsModalOpen(true)} />
         <Benefits />
         <AboutTrainer onBookingClick={() => setIsModalOpen(true)} />
-        
-        {/* Оборачиваем форму в подвале в контейнер с ограничением ширины */}
         <div className="max-w-2xl mx-auto w-full px-4">
           <BookingForm />
         </div>

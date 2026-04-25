@@ -1,18 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../../services/supabase'
 
 const TELEGRAM_BOT_TOKEN = '8286883049:AAH4dOdRfGdePaA-mtSvduzym1OcYhtDrPo'
 const TELEGRAM_CHAT_ID = '438549035'
 
-function BookingForm({ onSuccess }) {
+function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    service: 'Пробная тренировка'
+    service: preselectedService || 'Пробная тренировка'
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
+
+  // Обновляем форму, если preselectedService меняется
+  useEffect(() => {
+    if (preselectedService) {
+      setFormData(prev => ({ ...prev, service: preselectedService }))
+    }
+  }, [preselectedService])
 
   // Отправка в Telegram
   const sendToTelegram = async (data) => {
@@ -111,7 +118,11 @@ function BookingForm({ onSuccess }) {
     
     if (supabaseSuccess || telegramSuccess) {
       setIsSubmitted(true)
-      setFormData({ name: '', phone: '', service: 'Пробная тренировка' })
+      setFormData({ 
+        name: '', 
+        phone: '', 
+        service: preselectedService || 'Пробная тренировка'
+      })
       setTimeout(() => {
         setIsSubmitted(false)
         if (onSuccess) onSuccess()
@@ -174,25 +185,27 @@ function BookingForm({ onSuccess }) {
         />
       </div>
 
-      <div>
-        <label className="block text-text-primary font-medium mb-2">Выберите услугу</label>
-        <select
-          name="service"
-          value={formData.service}
-          onChange={handleChange}
-          className="w-full px-4 py-3 rounded-2xl bg-gray-800 border border-gray-700 text-text-primary focus:border-primary focus:outline-none appearance-none pr-12"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right 1rem center',
-            backgroundSize: '1.5rem'
-          }}
-        >
-          <option>Пробная тренировка</option>
-          <option>Персональная тренировка</option>
-          <option>Абонемент на 8 занятий</option>
-        </select>
-      </div>
+      {!hideServiceSelect && (
+        <div>
+          <label className="block text-text-primary font-medium mb-2">Выберите услугу</label>
+          <select
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-2xl bg-gray-800 border border-gray-700 text-text-primary focus:border-primary focus:outline-none appearance-none pr-12"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'right 1rem center',
+              backgroundSize: '1.5rem'
+            }}
+          >
+            <option>Пробная тренировка</option>
+            <option>Персональная тренировка</option>
+            <option>Абонемент на 8 занятий</option>
+          </select>
+        </div>
+      )}
 
       <div className="flex items-center gap-2">
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
