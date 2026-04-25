@@ -20,7 +20,10 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
     }
   }, [preselectedService])
 
-  // Отправка в Telegram
+  const openPage = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+
   const sendToTelegram = async (data) => {
     const message = `🔴 НОВАЯ ЗАЯВКА FIT YOURSELF 🔴
     
@@ -51,7 +54,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
     }
   }
 
-  // Отправка в Supabase
   const sendToSupabase = async (data) => {
     try {
       let serviceId = null
@@ -204,13 +206,19 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
         <label htmlFor="consent" className="text-sm text-text-secondary">
           Согласен с 
-          <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
+          <span 
+            onClick={() => openPage('/privacy')} 
+            className="text-primary hover:underline cursor-pointer ml-1"
+          >
             политикой конфиденциальности
-          </a>
+          </span>
           {' '}и{' '}
-          <a href="/offer" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+          <span 
+            onClick={() => openPage('/offer')} 
+            className="text-primary hover:underline cursor-pointer"
+          >
             договором оферты
-          </a>
+          </span>
         </label>
       </div>
 
