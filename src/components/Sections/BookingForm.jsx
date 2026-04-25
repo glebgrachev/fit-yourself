@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { supabase } from '../../services/supabase'
 
 const TELEGRAM_BOT_TOKEN = '8286883049:AAH4dOdRfGdePaA-mtSvduzym1OcYhtDrPo'
@@ -210,7 +211,7 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
       <div className="flex items-center gap-2">
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
         <label htmlFor="consent" className="text-sm text-text-secondary">
-          Согласен с <a href="#" className="text-primary hover:underline">политикой конфиденциальности</a>
+          Согласен с <Link to="/privacy" target="_blank" className="text-primary hover:underline">политикой конфиденциальности</Link>
         </label>
       </div>
 
