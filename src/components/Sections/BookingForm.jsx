@@ -14,7 +14,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
 
-  // Обновляем форму, если preselectedService меняется
   useEffect(() => {
     if (preselectedService) {
       setFormData(prev => ({ ...prev, service: preselectedService }))
@@ -55,7 +54,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
   // Отправка в Supabase
   const sendToSupabase = async (data) => {
     try {
-      // Получаем service_id по названию услуги
       let serviceId = null
       const { data: serviceData, error: serviceError } = await supabase
         .from('services')
@@ -108,13 +106,8 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
     setIsSubmitting(true)
     setError('')
 
-    console.log('🚀 Начало отправки формы...')
-    
     const supabaseSuccess = await sendToSupabase(formData)
     const telegramSuccess = await sendToTelegram(formData)
-    
-    console.log('Результат Supabase:', supabaseSuccess)
-    console.log('Результат Telegram:', telegramSuccess)
     
     if (supabaseSuccess || telegramSuccess) {
       setIsSubmitted(true)
@@ -159,7 +152,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         </div>
       )}
 
-      {/* Имя */}
       <div>
         <label className="block text-text-primary font-medium mb-2">Ваше имя *</label>
         <input
@@ -173,7 +165,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         />
       </div>
 
-      {/* Телефон */}
       <div>
         <label className="block text-text-primary font-medium mb-2">Телефон *</label>
         <input
@@ -187,7 +178,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         />
       </div>
 
-      {/* Выбор услуги (если не скрыт) */}
       {!hideServiceSelect && (
         <div>
           <label className="block text-text-primary font-medium mb-2">Выберите услугу</label>
@@ -210,7 +200,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         </div>
       )}
 
-      {/* Чекбокс согласия */}
       <div className="flex items-center gap-2">
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
         <label htmlFor="consent" className="text-sm text-text-secondary">
@@ -225,7 +214,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         </label>
       </div>
 
-      {/* Кнопка отправки */}
       <button
         type="submit"
         disabled={isSubmitting}
