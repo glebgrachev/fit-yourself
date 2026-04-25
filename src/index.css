@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@600;700&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  --color-bg-light: #0A0E1A;
+  --color-bg-dark: #1F2128;
+  --color-bg-gray: #16171D;
+  --color-primary: #FF5722;
+  --color-secondary: #F97316;
+  --color-text-primary: #F3F4F6;
+  --color-text-secondary: #9CA3AF;
+  --color-border: #2E303A;
+  --color-success: #10B981;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-primary);
+    font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+  }
+}
+
+/* Кастомный класс для карточек */
+.card-bg {
+  background-color: #1A1F30;
+}
