@@ -201,14 +201,7 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
       <div className="flex items-center gap-2">
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
         <label htmlFor="consent" className="text-sm text-text-secondary">
-          Согласен с 
-          <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
-            политикой конфиденциальности
-          </a>
-          {' '}и{' '}
-          <a href="/offer" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-            договором оферты
-          </a>
+          Согласен с политикой конфиденциальности и договором оферты
         </label>
       </div>
 
