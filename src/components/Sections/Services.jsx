@@ -28,7 +28,7 @@ function Services({ onBookingClick }) {
 
   if (loading) {
     return (
-      <section id="services" className="py-16 bg-gray-800/50">
+      <section id="services" className="py-16 bg-bg-light">
         <div className="container mx-auto px-4 text-center">
           <p className="text-text-secondary">Загрузка услуг...</p>
         </div>
@@ -37,7 +37,7 @@ function Services({ onBookingClick }) {
   }
 
   return (
-    <section id="services" className="py-16 bg-gray-800/50">
+    <section id="services" className="py-16 bg-bg-light">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-text-primary mb-12">
           Услуги и цены

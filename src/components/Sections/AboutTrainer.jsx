@@ -39,7 +39,7 @@ function AboutTrainer({ onBookingClick }) {
   if (!trainer) return null
 
   return (
-    <section id="about" className="py-16 bg-gray-800/50">
+    <section id="about" className="py-16 bg-bg-light">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row gap-12">
           {/* Левая часть — фото с ограничением ширины */}
