@@ -12,7 +12,7 @@ function Footer() {
             Договор оферты
           </Link>
         </div>
-        <p>© 2026 Fit Yourself. Все права защищены.</p>
+        <p>© 04.2026 Fit Yourself. Все права защищены.</p>
       </div>
     </footer>
   )
