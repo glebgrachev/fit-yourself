@@ -20,10 +20,6 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
     }
   }, [preselectedService])
 
-  const openPage = (url) => {
-    window.open(url, '_blank', 'noopener,noreferrer')
-  }
-
   const sendToTelegram = async (data) => {
     const message = `🔴 НОВАЯ ЗАЯВКА FIT YOURSELF 🔴
     
@@ -206,19 +202,13 @@ function BookingForm({ onSuccess, preselectedService, hideServiceSelect = false 
         <input type="checkbox" id="consent" required className="w-4 h-4 bg-gray-800 border border-gray-700 rounded" />
         <label htmlFor="consent" className="text-sm text-text-secondary">
           Согласен с 
-          <span 
-            onClick={() => openPage('/privacy')} 
-            className="text-primary hover:underline cursor-pointer ml-1"
-          >
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline ml-1">
             политикой конфиденциальности
-          </span>
+          </a>
           {' '}и{' '}
-          <span 
-            onClick={() => openPage('/offer')} 
-            className="text-primary hover:underline cursor-pointer"
-          >
+          <a href="/offer" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
             договором оферты
-          </span>
+          </a>
         </label>
       </div>
 
